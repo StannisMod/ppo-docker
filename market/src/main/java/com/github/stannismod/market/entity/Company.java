@@ -1,5 +1,7 @@
 package com.github.stannismod.market.entity;
 
+import com.github.stannismod.market.controller.StockException;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -29,7 +31,7 @@ public class Company {
 
     public void buyStocks(int stocks) {
         if (this.stocks < stocks) {
-            throw new RuntimeException("Not enough stocks");
+            throw new StockException("Not enough stocks");
         }
         this.stocks -= stocks;
     }

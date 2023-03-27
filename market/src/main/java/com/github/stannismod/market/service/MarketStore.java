@@ -1,5 +1,6 @@
 package com.github.stannismod.market.service;
 
+import com.github.stannismod.market.controller.StockException;
 import com.github.stannismod.market.entity.Company;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,7 @@ public class MarketStore {
 
     public Company addCompany(Company company) {
         if (companyRepository.findByName(company.getName()).isPresent()) {
-            throw new RuntimeException("Company already exists");
+            throw new StockException("Company already exists");
         }
         return companyRepository.save(company);
     }
@@ -29,7 +30,7 @@ public class MarketStore {
 
     public Company getCompany(String name) {
         return companyRepository.findByName(name)
-                                .orElseThrow(() -> new RuntimeException("Company not found"));
+                                .orElseThrow(() -> new StockException("Company not found"));
     }
 
     public Company buyStocks(String name, int stocks) {
